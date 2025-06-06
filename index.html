@@ -17,6 +17,7 @@
       --text-light: #333333;
       --glass-bg: rgba(248, 245, 242, 0.1);
       --glass-border: rgba(164, 117, 81, 0.2);
+      --coffee-bean-color: #272727;
     }
 
     * {
@@ -48,7 +49,7 @@
       position: absolute;
       width: 8px;
       height: 12px;
-      background: var(#272727);
+      background: var(--coffee-bean-color);
       border-radius: 50%;
       animation: float 20s infinite linear;
     }
@@ -271,15 +272,17 @@
     }
 
     /* Enhanced Image Slideshow */
-    .menu-image-frame {
+    .menu-image-frame,
+    .about-image-frame {
       width: 100%;
+      max-width: 500px;
       height: 320px;
       background: var(--glass-bg);
       backdrop-filter: blur(20px);
       border: 1px solid var(--glass-border);
       border-radius: 15px;
       overflow: hidden;
-      margin-bottom: 1.5rem;
+      margin: 2rem auto;
       box-shadow: 0 4px 10px rgba(164, 117, 81, 0.1);
       transition: transform 0.4s ease;
       position: relative;
@@ -345,7 +348,8 @@
       transform: scale(1.2);
     }
 
-    .menu-image-frame:hover {
+    .menu-image-frame:hover,
+    .about-image-frame:hover {
       transform: scale(1.03);
     }
 
@@ -423,18 +427,23 @@
       margin: 2rem auto;
       box-shadow: 0 8px 20px rgba(164, 117, 81, 0.2);
       transition: transform 0.4s ease;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .about-image-frame img {
+    .about-image-frame .slideshow-container {
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      border-radius: 20px;
-      object-position: center;
     }
 
-    .about-image-frame:hover {
-      transform: scale(1.05);
+    .about-image-frame .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      background: rgba(248, 245, 242, 0.1);
     }
 
     .about-text {
@@ -501,14 +510,16 @@
     }
 
     .social-links {
-      display: flex;  
-      img {
-        width: 170px;
-        height: 50px;
-      }
+      display: flex;
       justify-content: center;
       gap: 1rem;
       margin-bottom: 2rem;
+    }
+
+    .social-links img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
 
     .social-link {
@@ -582,7 +593,7 @@
   <header>
     <div class="hero-content">
       <div class="logo-container">
-       <img src="LactoNew.png" alt="LactoBrew Logo" class="logo" />
+        <img src="8067.png" alt="LactoBrew Logo" class="logo" />
         <div class="logo-beans" id="logoBeans"></div>
       </div>
       <p class="tagline">Take a break, would ya?</p>
@@ -600,13 +611,13 @@
         <div class="menu-image-frame">
           <div class="slideshow-container" id="slideshow1">
             <div class="slide active">
-               <img src="8067.png" alt="Bittersweet No.1 Coffee - Main" />
-              </div>
+              <img src="8067.png" alt="Bittersweet No.1 Coffee - Main" />
+            </div>
             <div class="slide">
-              <img src="8067.png" alt="Bittersweet No.1 Coffee - Process" />
-              </div>
+              <img src="8071.png" alt="Bittersweet No.1 Coffee - Process" />
+            </div>
             <div class="slide">
-              <img src="8067.png" alt="Bittersweet No.1 Coffee - Close-up" />
+              <img src="8074.png" alt="Bittersweet No.1 Coffee - Close-up" />
             </div>
           </div>
           <div class="slideshow-dots">
@@ -631,14 +642,23 @@
   <section class="about-section fade-in" id="about">
     <div class="about-content">
       <h2 class="section-title">Crafted with Passion</h2>
-      <<div class="slide active">
-        <img src="8062.png" alt="Bittersweet No.1 Coffee - Main" />
-      </div>
-      <div class="slide">
-        <img src="8071.png" alt="Bittersweet No.1 Coffee - Process" />
-      </div>
-      <div class="slide">
-        <img src="8067.png" alt="Bittersweet No.1 Coffee - Close-up" />
+      <div class="about-image-frame">
+        <div class="slideshow-container" id="slideshow2">
+          <div class="slide active">
+            <img src="8062.png" alt="LactoBrew Coffee Making Process - 1" />
+          </div>
+          <div class="slide">
+            <img src="8071.png" alt="LactoBrew Coffee Making Process - 2" />
+          </div>
+          <div class="slide">
+            <img src="8067.png" alt="LactoBrew Coffee Making Process - 3" />
+          </div>
+        </div>
+        <div class="slideshow-dots">
+          <span class="dot active" onclick="currentSlide(1, 'slideshow2')"></span>
+          <span class="dot" onclick="currentSlide(2, 'slideshow2')"></span>
+          <span class="dot" onclick="currentSlide(3, 'slideshow2')"></span>
+        </div>
       </div>
       <p class="about-text">
         Born in the heart of Surabaya, LactoBrew represents more than just coffee – it's a movement. 
@@ -657,23 +677,24 @@
   <section class="order-section">
     <h2 class="section-title" style="color: #272727;">Ready to Experience LactoBrew?</h2>
     <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">Order now and taste the difference</p>
-    <a href="https://wa.me/6287808788077" target="_blank" class="order-btn">
+    <a summons://wa.me/6287808788077" target="_blank" class="order-btn">
       Order via WhatsApp
     </a>
   </section>
 
- <footer>
+  <!-- Footer -->
+  <footer>
     <div class="footer-content">
       <div class="social-links">
-       <a href="https://wa.me/6287808788077" class="social-link" title="WhatsApp" aria-label="Contact us on WhatsApp">
-  <img src="wea1.png" alt="WhatsApp Logo">
-</a>
-<a href="https://instagram.com/lactobrew" class="social-link" title="Instagram" aria-label="Follow us on Instagram">
-  <img src="untitel.png" alt="Instagram Logo">
-</a>
-<a href="mailto:pratamakepasraja@gmail.com" class="social-link" title="Email" aria-label="Email us">
-  <img src="jimel.png" alt="Email Icon">
-</a>
+        <a href="https://wa.me/6287808788077" class="social-link" title="WhatsApp" aria-label="Contact us on WhatsApp">
+          <img src="wea_2.png" alt="WhatsApp Logo">
+        </a>
+        <a href="https://instagram.com/lactobrew" class="social-link" title="Instagram" aria-label="Follow us on Instagram">
+          <img src="ige_2.png" alt="Instagram Logo">
+        </a>
+        <a href="mailto:pratamakepasraja@gmail.com" class="social-link" title="Email" aria-label="Email us">
+          <img src="jimel.png" alt="Email Icon">
+        </a>
       </div>
       <p class="copyright">© 2025 LactoBrew. Brewed with love in Surabaya, Indonesia.</p>
     </div>
@@ -704,10 +725,9 @@
         const bean = document.createElement('div');
         bean.className = 'logo-bean';
         
-        // Position beans around the logo in a circular pattern
         const angle = (i / numberOfLogoBeans) * 2 * Math.PI;
-        const radius = 200 + Math.random() * 100; // Random radius for natural look
-        const x = 50 + Math.cos(angle) * (radius / 8); // Percentage positioning
+        const radius = 200 + Math.random() * 100;
+        const x = 50 + Math.cos(angle) * (radius / 8);
         const y = 50 + Math.sin(angle) * (radius / 8);
         
         bean.style.left = x + '%';
@@ -719,48 +739,50 @@
       }
     }
 
-    // Slideshow functionality
-    let slideIndex = 1;
-    let slideInterval;
+    // Slideshow functionality for multiple slideshows
+    const slideshows = {
+      'slideshow1': { slideIndex: 1, interval: null },
+      'slideshow2': { slideIndex: 1, interval: null }
+    };
 
     function showSlides(n, containerId) {
       const container = document.getElementById(containerId);
       const slides = container.querySelectorAll('.slide');
       const dots = container.parentElement.querySelectorAll('.dot');
       
-      if (n > slides.length) { slideIndex = 1; }
-      if (n < 1) { slideIndex = slides.length; }
+      if (n > slides.length) { slideshows[containerId].slideIndex = 1; }
+      if (n < 1) { slideshows[containerId].slideIndex = slides.length; }
       
       slides.forEach(slide => slide.classList.remove('active'));
       dots.forEach(dot => dot.classList.remove('active'));
       
-      if (slides[slideIndex - 1]) {
-        slides[slideIndex - 1].classList.add('active');
+      if (slides[slideshows[containerId].slideIndex - 1]) {
+        slides[slideshows[containerId].slideIndex - 1].classList.add('active');
       }
-      if (dots[slideIndex - 1]) {
-        dots[slideIndex - 1].classList.add('active');
+      if (dots[slideshows[containerId].slideIndex - 1]) {
+        dots[slideshows[containerId].slideIndex - 1].classList.add('active');
       }
     }
 
     function currentSlide(n, containerId) {
-      slideIndex = n;
-      showSlides(slideIndex, containerId);
-      resetSlideTimer();
+      slideshows[containerId].slideIndex = n;
+      showSlides(n, containerId);
+      resetSlideTimer(containerId);
     }
 
     function nextSlide(containerId) {
-      slideIndex++;
-      showSlides(slideIndex, containerId);
+      slideshows[containerId].slideIndex++;
+      showSlides(slideshows[containerId].slideIndex, containerId);
     }
 
-    function autoSlide() {
-      slideIndex++;
-      showSlides(slideIndex, 'slideshow1');
+    function autoSlide(containerId) {
+      slideshows[containerId].slideIndex++;
+      showSlides(slideshows[containerId].slideIndex, containerId);
     }
 
-    function resetSlideTimer() {
-      clearInterval(slideInterval);
-      slideInterval = setInterval(autoSlide, 4000); // 4 seconds
+    function resetSlideTimer(containerId) {
+      clearInterval(slideshows[containerId].interval);
+      slideshows[containerId].interval = setInterval(() => autoSlide(containerId), 4000);
     }
 
     // Scroll animations
@@ -820,7 +842,6 @@
           this.style.transform = 'translateY(0) rotateX(0)';
         });
 
-        // Stagger animation on load
         setTimeout(() => {
           card.style.opacity = '1';
           card.style.transform = 'translateY(0)';
@@ -837,9 +858,11 @@
       animatePrices();
       enhanceCards();
       
-      // Initialize slideshow
-      showSlides(slideIndex, 'slideshow1');
-      slideInterval = setInterval(autoSlide, 4000);
+      // Initialize all slideshows
+      Object.keys(slideshows).forEach(containerId => {
+        showSlides(slideshows[containerId].slideIndex, containerId);
+        slideshows[containerId].interval = setInterval(() => autoSlide(containerId), 4000);
+      });
     });
 
     // Add parallax effect to header
