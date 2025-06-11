@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LactoBrew - Menu</title>
+  <link rel="icon" type="image/png" href="LactoWhite.ico" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Open+Sans:wght@300;400;500&display=swap">
+  <style>
+    :root {
+      --primary-gradient: linear-gradient(135deg, #5C4033 0%, #A47551 50%, #D4AF37 100%);
+      --secondary-gradient: linear-gradient(135deg, #ffffff 0%, #f8f5f2 50%, #5C4033 100%);
+      --accent-gold: #A47551;
+      --cream: #f8f5f2;
+      --dark-brown: #5C4033;
+      --warm-brown: #A47551;
+      --text-light: #333333;
+      --glass-bg: rgba(248, 245, 242, 0.1);
+      --glass-border: rgba(164, 117, 81, 0.2);
+      --coffee-bean-color: #272727;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--secondary-gradient);
+      color: var(--text-light);
+      overflow-x: hidden;
+      line-height: 1.6;
+      padding-top: 80px;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(248, 245, 242, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border);
+      z-index: 1000;
+      padding: 1rem 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      height: 40px;
+      width: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-light);
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent-gold);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent-gold);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--text-light);
+      cursor: pointer;
+    }
+
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.1;
+    }
+
+    .coffee-bean {
+      position: absolute;
+      width: 8px;
+      height: 12px;
+      background: var(--coffee-bean-color);
+      border-radius: 50%;
+      animation: float 20s infinite linear;
+      will-change: transform, opacity;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    }
+
+    .menu-section {
+      padding: 6rem 2rem;
+      position: relative;
+      margin-top: 4rem;
+    }
+
+    .section-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 3rem;
+      color: #272727;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 4px;
+      background: var(--primary-gradient);
+      border-radius: 2px;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .menu-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 2.5rem;
+      position: relative;
+      transition: all 0.4s ease;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .menu-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--primary-gradient);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .menu-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .menu-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+      border-color: var(--accent-gold);
+    }
+
+    .menu-image-frame {
+      width: 100%;
+      max-width: 500px;
+      height: 320px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 15px;
+      overflow: hidden;
+      margin: 2rem auto;
+      box-shadow: 0 4px 10px rgba(164, 117, 81, 0.1);
+      transition: transform 0.4s ease;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .menu-image-frame:hover {
+      transform: scale(1.03);
+    }
+
+    .slideshow-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .slide {
+      display: none;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      animation: slideIn 0.8s ease-in-out;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      background: rgba(248, 245, 242, 0.1);
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .slideshow-dots {
+      position: absolute;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 10;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      border: 1px solid var(--glass-border);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .dot.active {
+      background: var(--accent-gold);
+      transform: scale(1.3);
+      border-color: var(--accent-gold);
+    }
+
+    .card-number {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: rgba(164, 117, 81, 0.2);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .menu-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.6rem;
+      color: #272727;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .menu-description {
+      font-size: 1.15rem;
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+      line-height: 1.8;
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    .price {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent-gold);
+      margin-bottom: 1.5rem;
+      display: inline-block;
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+
+    .price:hover {
+      transform: translateY(-3px);
+    }
+
+    .price::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent-gold);
+      transition: width 0.3s ease;
+    }
+
+    .price:hover::after {
+      width: 100%;
+    }
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .feature-tag {
+      background: rgba(212, 175, 55, 0.15);
+      color: var(--accent-gold);
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .feature-tag:hover {
+      background: var(--accent-gold);
+      color: var(--dark-brown);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+      .menu-section {
+        padding: 4rem 1.5rem;
+      }
+
+      .menu-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      }
+
+      .menu-image-frame {
+        height: 280px;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(248, 245, 242, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 1.5rem;
+        border-top: 1px solid var(--glass-border);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-container">
+      <img src="LactoWhite.ico" alt="LactoBrew Logo" class="nav-logo" aria-label="LactoBrew Logo" />
+      <ul class="nav-links" role="navigation">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html" class="active" aria-current="page">Menu</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="story.html">Our Story</a></li>
+      </ul>
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Toggle mobile menu">☰</button>
+    </div>
+  </nav>
+
+  <div class="bg-animation" id="bgAnimation">
+    <div class="coffee-bean" style="left: 10%; animation: float 15s infinite linear;"></div>
+    <div class="coffee-bean" style="left: 30%; animation: float 18s infinite linear;"></div>
+    <div class="coffee-bean" style="left: 50%; animation: float 20s infinite linear;"></div>
+    <div class="coffee-bean" style="left: 70%; animation: float 17s infinite linear;"></div>
+    <div class="coffee-bean" style="left: 90%; animation: float 19s infinite linear;"></div>
+  </div>
+
+  <section class="menu-section" id="menu">
+    <h2 class="section-title fade-in">Our Signature Collection</h2>
+    <div class="menu-grid">
+      <div class="menu-card fade-in" role="article" aria-labelledby="bittersweet-title">
+        <div class="card-number">01</div>
+        <div class="menu-image-frame" role="region" aria-label="Bittersweet No.1 Slideshow">
+          <div class="slideshow-container" id="slideshow1">
+            <div class="slide active">
+              <img src="8067.png" alt="Bittersweet No.1 Coffee - Main Image" />
+            </div>
+            <div class="slide">
+              <img src="8071.png" alt="Bittersweet No.1 Coffee - Process Image" />
+            </div>
+            <div class="slide">
+              <img src="8074.png" alt="Bittersweet No.1 Coffee - Close-up Image" />
+            </div>
+          </div>
+          <div class="slideshow-dots">
+            <button class="dot active" onclick="currentSlide(1, 'slideshow1')" aria-label="Show slide 1 of Bittersweet No.1"></button>
+            <button class="dot" onclick="currentSlide(2, 'slideshow1')" aria-label="Show slide 2 of Bittersweet No.1"></button>
+            <button class="dot" onclick="currentSlide(3, 'slideshow1')" aria-label="Show slide 3 of Bittersweet No.1"></button>
+          </div>
+        </div>
+        <h3 class="menu-title" id="bittersweet-title">Bittersweet No.1</h3>
+        <p class="menu-description">The OG. The one that started it all. A smooth combination of Coffee, Milk, and Vanilla.</p>
+        <div class="features">
+          <span class="feature-tag">Original Recipe</span>
+          <span class="feature-tag">Premium Beans</span>
+          <span class="feature-tag">Made by Order</span>
+        </div>
+        <div class="price">Rp 18.000</div>
+      </div>
+      <!-- Add more menu cards here as needed -->
+    </div>
+  </section>
+
+  <script>
+    function toggleMobileMenu() {
+      const navLinks = document.querySelector('.nav-links');
+      navLinks.classList.toggle('active');
+      const menuBtn = document.querySelector('.mobile-menu-btn');
+      menuBtn.setAttribute('aria-expanded', navLinks.classList.contains('active'));
+    }
+
+    function createCoffeeBeans() {
+      const bgAnimation = document.getElementById('bgAnimation');
+      const numberOfBeans = window.innerWidth > 768 ? 10 : 5;
+      bgAnimation.innerHTML = '';
+      for (let i = 0; i < numberOfBeans; i++) {
+        const bean = document.createElement('div');
+        bean.className = 'coffee-bean';
+        bean.style.left = Math.random() * 100 + '%';
+        bean.style.animationDelay = Math.random() * 20 + 's';
+        bean.style.animationDuration = (15 + Math.random() * 5) + 's';
+        bgAnimation.appendChild(bean);
+      }
+    }
+
+    function currentSlide(n, slideshowId) {
+      const slides = document.querySelectorAll(`#${slideshowId} .slide`);
+      const dots = document.querySelectorAll(`#${slideshowId} ~ .slideshow-dots .dot`);
+      slides.forEach((slide, index) => {
+        slide.classList.remove('active');
+        dots[index].classList.remove('active');
+        if (index + 1 === n) {
+          slide.classList.add('active');
+          dots[index].classList.add('active');
+        }
+      });
+    }
+
+    function autoSlideShow(slideshowId) {
+      const slides = document.querySelectorAll(`#${slideshowId} .slide`);
+      const dots = document.querySelectorAll(`#${slideshowId} ~ .slideshow-dots .dot`);
+      let currentIndex = Array.from(slides).findIndex(slide => slide.classList.contains('active'));
+      currentIndex = (currentIndex + 1) % slides.length;
+      currentSlide(currentIndex + 1, slideshowId);
+    }
+
+    function observeElements() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+      document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    }
+
+    function handleResize() {
+      createCoffeeBeans();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      createCoffeeBeans();
+      observeElements();
+      setInterval(() => autoSlideShow('slideshow1'), 5000);
+    });
+
+    window.addEventListener('resize', handleResize);
+
+    document.addEventListener('click', (event) => {
+      const nav = document.querySelector('nav');
+      const navLinks = document.querySelector('.nav-links');
+      const menuBtn = document.querySelector('.mobile-menu-btn');
+      if (!nav.contains(event.target) && navLinks.classList.contains('active')) {
+        navLinks.classList.remove('active');
+        menuBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LactoBrew - About Us</title>
+  <link rel="icon" type="image/png" href="LactoWhite.ico" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Open+Sans:wght@300;400;500&display=swap">
+  <style>
+    :root {
+      --primary-gradient: linear-gradient(135deg, #5C4033 0%, #A47551 50%, #D4AF37 100%);
+      --secondary-gradient: linear-gradient(135deg, #ffffff 0%, #f8f5f2 50%, #5C4033 100%);
+      --accent-gold: #A47551;
+      --cream: #f8f5f2;
+      --dark-brown: #5C4033;
+      --warm-brown: #A47551;
+      --text-light: #333333;
+      --glass-bg: rgba(248, 245, 242, 0.1);
+      --glass-border: rgba(164, 117, 81, 0.2);
+      --coffee-bean-color: #272727;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--secondary-gradient);
+      color: var(--text-light);
+      overflow-x: hidden;
+      line-height: 1.6;
+      padding-top: 80px;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(248, 245, 242, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border);
+      z-index: 1000;
+      padding: 1rem 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      height: 40px;
+      width: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-light);
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent-gold);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent-gold);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--text-light);
+      cursor: pointer;
+    }
+
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.1;
+    }
+
+    .coffee-bean {
+      position: absolute;
+      width: 8px;
+      height: 12px;
+      background: var(--coffee-bean-color);
+      border-radius: 50%;
+      animation: float 20s infinite linear;
+      will-change: transform, opacity;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    }
+
+    .hero-section {
+      min-height: 60vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      background: var(--primary-gradient);
+      overflow: hidden;
+      padding: 4rem 2rem;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(92, 64, 51, 0.3), rgba(212, 175, 55, 0.2));
+      z-index: 1;
+    }
+
+    .hero-content {
+      z-index: 2;
+      max-width: 900px;
+      padding: 2rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+      font-weight: 600;
+      color: #272727;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.2rem, 2.8vw, 1.6rem);
+      opacity: 0.9;
+      margin-bottom: 2rem;
+      color: #272727;
+    }
+
+    .cta-hero {
+      background: rgba(164, 117, 81, 0.2);
+      border: 2px solid var(--accent-gold);
+      color: var(--cream);
+      padding: 1rem 2.5rem;
+      font-size: 1.1rem;
+      border-radius: 35px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(12px);
+      text-decoration: none;
+      display: inline-block;
+      position: relative;
+      overflow: hidden;
+      font-weight: 500;
+    }
+
+    .cta-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.5s;
+    }
+
+    .cta-hero:hover::before {
+      left: 100%;
+    }
+
+    .cta-hero:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(164, 117, 81, 0.3);
+      background: rgba(164, 117, 81, 0.3);
+    }
+
+    .about-section {
+      padding: 6rem 2rem;
+      text-align: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+      font-weight: 600;
+      margin-bottom: 3rem;
+      color: #272727;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 4px;
+      background: var(--primary-gradient);
+      border-radius: 2px;
+    }
+
+    .about-content {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .about-text {
+      font-size: 1.4rem;
+      line-height: 1.9;
+      opacity: 0.9;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .about-image-frame {
+      width: 100%;
+      max-width: 500px;
+      height: 320px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 15px;
+      overflow: hidden;
+      margin: 2rem auto;
+      box-shadow: 0 4px 10px rgba(164, 117, 81, 0.1);
+      transition: transform 0.4s ease;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slideshow-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .slide {
+      display: none;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      animation: slideIn 0.8s ease-in-out;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      background: rgba(248, 245, 242, 0.1);
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .slideshow-dots {
+      position: absolute;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 10;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.6);
+      border: 1px solid var(--accent-gold);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .dot:hover,
+    .dot.active {
+      background: var(--accent-gold);
+      transform: scale(1.3);
+    }
+
+    .about-image-frame:hover {
+      transform: scale(1.03);
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .value-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 2.5rem;
+      text-align: center;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .value-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--primary-gradient);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .value-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .value-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .value-icon {
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--accent-gold);
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    }
+
+    .value-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--dark-brown);
+    }
+
+    .value-desc {
+      font-size: 1rem;
+      opacity: 0.85;
+    }
+
+    footer {
+      background: var(--dark-brown);
+      padding: 4rem 2rem 2rem;
+      text-align: center;
+      color: var(--cream);
+      border-top: 1px solid rgba(212, 175, 55, 0.2);
+    }
+
+    .footer-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .newsletter-form {
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .newsletter-input {
+      padding: 0.8rem 1.5rem;
+      border: 1px solid var(--glass-border);
+      border-radius: 25px;
+      background: rgba(248, 245, 242, 0.1);
+      color: var(--cream);
+      font-size: 1rem;
+      width: 250px;
+      max-width: 100%;
+    }
+
+    .newsletter-input::placeholder {
+      color: rgba(248, 245, 242, 0.7);
+    }
+
+    .newsletter-btn {
+      padding: 0.8rem 2rem;
+      background: var(--accent-gold);
+      border: none;
+      border-radius: 25px;
+      color: var(--dark-brown);
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .newsletter-btn:hover {
+      background: #FFD700;
+      transform: translateY(-2px);
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .social-link {
+      width: 50px;
+      height: 50px;
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-gold);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .social-link img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+    }
+
+    .social-link:hover {
+      background: var(--accent-gold);
+      color: var(--dark-brown);
+      transform: translateY(-3px);
+    }
+
+    .copyright {
+      opacity: 0.8;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(248, 245, 242, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 1.5rem;
+        border-top: 1px solid var(--glass-border);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .hero-section {
+        padding: 3rem 1.5rem;
+      }
+
+      .about-section {
+        padding: 4rem 1.5rem;
+      }
+
+      .about-image-frame {
+        height: 250px;
+      }
+
+      .newsletter-form {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .newsletter-input {
+        width: 100%;
+      }
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-container">
+      <img src="LactoNew.png" alt="LactoBrew Logo" class="nav-logo" aria-label="LactoBrew Logo" />
+      <ul class="nav-links" role="navigation">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="about.html" class="active" aria-current="page">About Us</a></li>
+        <li><a href="story.html">Our Story</a></li>
+      </ul>
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Toggle mobile menu">☰</button>
+    </div>
+  </nav>
+
+  <div class="bg-animation" id="bgAnimation"></div>
+
+  <section class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="hero-title fade-in">About LactoBrew</h1>
+      <p class="hero-subtitle fade-in">Crafting moments of joy with every sip, brewed with passion in Surabaya.</p>
+      <a href="menu.html" class="cta-hero fade-in">Explore Our Menu</a>
+    </div>
+  </section>
+
+  <section class="about-section">
+    <h2 class="section-title fade-in">Our Journey</h2>
+    <div class="about-content fade-in">
+      <p class="about-text">
+        Founded in the vibrant city of Surabaya, LactoBrew was born from a passion for exceptional coffee and a commitment to health-conscious indulgence. Our journey began with a simple idea: to create a beverage that combines the rich, bold flavors of Indonesian coffee with the smooth, creamy texture of milk, crafted through an 18-hour cold-brew process. We source our beans from local farmers, supporting sustainable practices and celebrating Indonesia’s coffee heritage.
+      </p>
+      <p class="about-text">
+        At LactoBrew, we believe coffee is more than a drink—it’s a moment to pause, connect, and savor. Our mission is to bring joy to every customer, one bottle at a time, while staying true to our values of quality, community, and innovation.
+      </p>
+      <div class="about-image-frame" role="region" aria-label="LactoBrew story slideshow">
+        <div class="slideshow-container" id="aboutSlideshow">
+          <div class="slide active">
+            <img src="about1.png" alt="LactoBrew coffee beans sourcing" />
+          </div>
+          <div class="slide">
+            <img src="about2.png" alt="LactoBrew brewing process" />
+          </div>
+          <div class="slide">
+            <img src="about3.png" alt="LactoBrew team at work" />
+          </div>
+        </div>
+        <div class="slideshow-dots">
+          <button class="dot active" onclick="currentSlide(1, 'aboutSlideshow')" aria-label="Show slide 1 of LactoBrew story"></button>
+          <button class="dot" onclick="currentSlide(2, 'aboutSlideshow')" aria-label="Show slide 2 of LactoBrew story"></button>
+          <button class="dot" onclick="currentSlide(3, 'aboutSlideshow')" aria-label="Show slide 3 of LactoBrew story"></button>
+        </div>
+      </div>
+    </div>
+    <div class="values-grid">
+      <div class="value-card fade-in" role="article" aria-labelledby="quality-title">
+        <div class="value-icon">☕</div>
+        <h3 class="value-title" id="quality-title">Uncompromising Quality</h3>
+        <p class="value-desc">We use only the finest ingredients, ensuring every sip is exceptional.</p>
+      </div>
+      <div class="value-card fade-in" role="article" aria-labelledby="community-title">
+        <div class="value-icon">🤝</div>
+        <h3 class="value-title" id="community-title">Community Focus</h3>
+        <p class="value-desc">Supporting local farmers and building connections in Surabaya.</p>
+      </div>
+      <div class="value-card fade-in" role="article" aria-labelledby="innovation-title">
+        <div class="value-icon">💡</div>
+        <h3 class="value-title" id="innovation-title">Innovation</h3>
+        <p class="value-desc">Constantly exploring new flavors and sustainable practices.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="newsletter-form">
+        <input type="email" class="newsletter-input" placeholder="Enter your email" aria-label="Email for newsletter" />
+        <button class="newsletter-btn" aria-label="Subscribe to newsletter">Subscribe</button>
+      </div>
+      <div class="social-links">
+        <a href="https://wa.me/6287808788077" class="social-link" title="WhatsApp" aria-label="Contact us on WhatsApp">
+          <img src="wea1.png" alt="WhatsApp Icon">
+        </a>
+        <a href="https://instagram.com/lactobrew" class="social-link" title="Instagram" aria-label="Follow us on Instagram">
+          <img src="untitel.png" alt="Instagram Icon">
+        </a>
+        <a href="mailto:pratamakepasraja@gmail.com" class="social-link" title="Email" aria-label="Email us">
+          <img src="jimel.png" alt="Email Icon">
+        </a>
+      </div>
+      <p class="copyright">© 2025 LactoBrew. Brewed with love in Surabaya, Indonesia.</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMobileMenu() {
+      const navLinks = document.querySelector('.nav-links');
+      navLinks.classList.toggle('active');
+      const menuBtn = document.querySelector('.mobile-menu-btn');
+      menuBtn.setAttribute('aria-expanded', navLinks.classList.contains('active'));
+    }
+
+    function currentSlide(n, slideshowId) {
+      const slides = document.querySelectorAll(`#${slideshowId} .slide`);
+      const dots = document.querySelectorAll(`#${slideshowId} ~ .slideshow-dots .dot`);
+      slides.forEach((slide, index) => {
+        slide.classList.remove('active');
+        dots[index].classList.remove('active');
+        dots[index].setAttribute('aria-selected', 'false');
+        if (index === n - 1) {
+          slide.classList.add('active');
+          dots[index].classList.add('active');
+          dots[index].setAttribute('aria-selected', 'true');
+        }
+      });
+    }
+
+    function autoSlide(slideshowId, interval = 5000) {
+      let current = 1;
+      const slides = document.querySelectorAll(`#${slideshowId} .slide`);
+      const totalSlides = slides.length;
+
+      function nextSlide() {
+        current = (current % totalSlides) + 1;
+        currentSlide(current, slideshowId);
+      }
+
+      return setInterval(nextSlide, interval);
+    }
+
+    function createCoffeeBeans() {
+      const bgAnimation = document.getElementById('bgAnimation');
+      const numberOfBeans = window.innerWidth > 768 ? 15 : 8;
+      bgAnimation.innerHTML = '';
+      for (let i = 0; i < numberOfBeans; i++) {
+        const bean = document.createElement('div');
+        bean.className = 'coffee-bean';
+        bean.style.left = Math.random() * 100 + '%';
+        bean.style.animationDelay = Math.random() * 20 + 's';
+        bean.style.animationDuration = (15 + Math.random() * 5) + 's';
+        bgAnimation.appendChild(bean);
+      }
+    }
+
+    function observeElements() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+      document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    }
+
+    function handleResize() {
+      createCoffeeBeans();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      createCoffeeBeans();
+      observeElements();
+      autoSlide('aboutSlideshow');
+    });
+
+    window.addEventListener('resize', handleResize);
+
+    document.addEventListener('click', (event) => {
+      const nav = document.querySelector('nav');
+      const navLinks = document.querySelector('.nav-links');
+      const menuBtn = document.querySelector('.mobile-menu-btn');
+      if (!nav.contains(event.target) && navLinks.classList.contains('active')) {
+        navLinks.classList.remove('active');
+        menuBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    document.querySelector('.newsletter-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Thank you for subscribing! (Note: This is a demo form.)');
+    });
+  </script>
+</body>
+</html>
