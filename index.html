@@ -444,7 +444,7 @@
   gap: 2rem;
   flex-wrap: wrap;
   max-width: 1100px;
-  margin: 0 auto;
+  margin: 0 auto 2rem auto; /* Jarak dari formulir */
 }
 
 .review-card {
@@ -481,6 +481,11 @@
   font-style: italic;
 }
 
+.form-container {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
 @media (max-width: 768px) {
   .reviews-container {
     flex-direction: column;
@@ -490,6 +495,10 @@
   .review-card {
     width: 100%;
     max-width: 350px;
+  }
+
+  .form-container {
+    width: 100%;
   }
 }
 
@@ -708,21 +717,15 @@
   <h2 class="section-title fade-in">What Our Customers Say</h2>
   <div class="reviews-container fade-in">
     <div class="review-card">
-      <div class="rating">★★★★☆</div>
-      <p class="review-text">"The milkbrew coffee is amazing! Perfect blend of smooth and bold. Highly recommend!"</p>
-      <p class="review-author">- Ani, Surabaya</p>
-    </div>
-    <div class="review-card">
       <div class="rating">★★★★★</div>
-      <p class="review-text">"Love the pastel vibes and the quality. Best coffee experience in town!"</p>
-      <p class="review-author">- Budi, Jakarta</p>
+      <p class="review-text">"Enak, Cocok buat yang suka kopi susu"</p>
+      <p class="review-author">- Naufal, Surabaya</p>
     </div>
-    <div class="review-card">
-      <div class="rating">★★★★☆</div>
-      <p class="review-text">"Great taste and quick service. Can’t wait for more flavors!"</p>
-      <p class="review-author">- Citra, Bandung</p>
-    </div>
+    <!-- Tambah review lain kalau ada -->
   </div>
+  <h2 class="section-title fade-in">Tinggalkan Ulasan Anda</h2>
+  <div class="form-container fade-in">
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSetGZOIGmNaSXcnQcMr-KBnpunXp4lvc8SdEtJ36xQ-sFuKEg/viewform?embedded=true" width="640" height="1164" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
 </section>
   <footer>
     <div class="footer-content">
