@@ -431,6 +431,67 @@
       color: var(--dark-brown);
       transform: translateY(-3px);
     }
+.reviews-section {
+  padding: 4rem 2rem;
+  text-align: center;
+  background: var(--secondary-gradient);
+  margin-bottom: 2rem;
+}
+
+.reviews-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.review-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: 15px;
+  padding: 1.5rem;
+  width: 300px;
+  box-shadow: 0 4px 10px rgba(164, 117, 81, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.review-card:hover {
+  transform: translateY(-5px);
+}
+
+.rating {
+  font-size: 1.2rem;
+  color: var(--accent-gold);
+  margin-bottom: 1rem;
+}
+
+.review-text {
+  font-size: 1rem;
+  color: var(--text-light);
+  opacity: 0.9;
+  margin-bottom: 1rem;
+}
+
+.review-author {
+  font-size: 0.9rem;
+  color: var(--warm-brown);
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .reviews-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .review-card {
+    width: 100%;
+    max-width: 350px;
+  }
+}
 
     footer {
       background: var(--dark-brown);
@@ -643,7 +704,26 @@
       </div>
     </div>
   </section>
-
+<section class="reviews-section">
+  <h2 class="section-title fade-in">What Our Customers Say</h2>
+  <div class="reviews-container fade-in">
+    <div class="review-card">
+      <div class="rating">★★★★☆</div>
+      <p class="review-text">"The milkbrew coffee is amazing! Perfect blend of smooth and bold. Highly recommend!"</p>
+      <p class="review-author">- Ani, Surabaya</p>
+    </div>
+    <div class="review-card">
+      <div class="rating">★★★★★</div>
+      <p class="review-text">"Love the pastel vibes and the quality. Best coffee experience in town!"</p>
+      <p class="review-author">- Budi, Jakarta</p>
+    </div>
+    <div class="review-card">
+      <div class="rating">★★★★☆</div>
+      <p class="review-text">"Great taste and quick service. Can’t wait for more flavors!"</p>
+      <p class="review-author">- Citra, Bandung</p>
+    </div>
+  </div>
+</section>
   <footer>
     <div class="footer-content">
       <div class="newsletter-form">
